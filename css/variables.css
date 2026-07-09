@@ -1,0 +1,69 @@
+/* css/variables.css */
+
+:root {
+  /* Font Family */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Color Palette - Light Theme (Default) */
+  --bg-primary: #f8fafc;        /* Soft grey background */
+  --bg-secondary: #ffffff;      /* White for cards and containers */
+  --bg-tertiary: #f1f5f9;       /* Light grey for inputs/borders */
+  
+  --text-primary: #0f172a;      /* Rich dark slate for body text */
+  --text-secondary: #475569;    /* Medium slate for secondary text */
+  --text-tertiary: #94a3b8;     /* Light slate for captions/disabled text */
+
+  --color-primary: #0d9488;     /* Brand Medical Teal */
+  --color-primary-hover: #0f766e;
+  --color-primary-light: #ccfbf1;
+  
+  --color-secondary: #0f172a;   /* Rich Slate/Indigo */
+  --color-secondary-hover: #1e293b;
+
+  --color-accent: #3b82f6;      /* Professional Blue for notifications/actions */
+  --color-success: #10b981;     /* Green for active, positive statuses */
+  --color-warning: #f59e0b;     /* Orange for warnings */
+  --color-danger: #ef4444;      /* Red for critical elements/alerts */
+
+  /* Border and Radius */
+  --border-color: #e2e8f0;
+  --border-radius-sm: 6px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 18px;
+  --border-radius-full: 9999px;
+
+  /* Shadows - Smooth, Modern elevation */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.04), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Sidebar and Header Sizing */
+  --sidebar-width: 260px;
+  --header-height: 70px;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --bg-primary: #090d16;        /* Ultra dark slate */
+  --bg-secondary: #111827;      /* Dark card containers */
+  --bg-tertiary: #1f2937;       /* Darker grey for borders/inputs */
+
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-tertiary: #6b7280;
+
+  --border-color: #1f2937;
+  
+  --color-primary-light: rgba(13, 148, 136, 0.15);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}

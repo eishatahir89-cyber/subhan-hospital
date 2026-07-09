@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "email": "admin@subhan.com",
+    "password": "password123",
+    "name": "Ali Subhan",
+    "role": "admin",
+    "department": "Administration"
+  },
+  {
+    "id": "2",
+    "email": "doctor@subhan.com",
+    "password": "password123",
+    "name": "Dr. Sarah Khan",
+    "role": "doctor",
+    "department": "Cardiology"
+  },
+  {
+    "id": "3",
+    "email": "reception@subhan.com",
+    "password": "password123",
+    "name": "Ayesha Tariq",
+    "role": "receptionist",
+    "department": "Front Desk"
+  }
+]
