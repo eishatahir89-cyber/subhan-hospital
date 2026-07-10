@@ -76,6 +76,14 @@
           <span class="nav-item-text">Billing & Receipts</span>
         </a>
 
+        <!-- Staff Navigation -->
+        <a href="#" class="nav-item" data-section="staff-view">
+          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <span class="nav-item-text">Staff</span>
+        </a>
+
         <!-- Settings Navigation -->
         <a href="#" class="nav-item" data-section="settings-view">
           <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -739,7 +747,7 @@
               <p>Review, search, filter, and register inpatient/outpatient admissions logs.</p>
             </div>
             <div class="header-actions">
-              <button class="btn-primary openRegisterModalBtn">
+              <button class="btn-primary openRegisterPatientModalBtn">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
                 </svg>
@@ -750,20 +758,35 @@
 
           <div class="section-card">
             <!-- Search & Filters Toolbar -->
-            <div class="toolbar-actions">
-              <div class="search-bar-container" style="width: 320px;">
+            <div class="toolbar-actions" style="flex-wrap: wrap; gap: 1rem;">
+              <div class="search-bar-container" style="flex: 1; min-width: 250px;">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <input type="search" placeholder="Search by name, ID or doctor..." class="search-input patientsSearchBox" aria-label="Search patients">
+                <input type="search" id="patientsSearchInput" placeholder="Search by name, ID or phone..." class="search-input" aria-label="Search patients">
               </div>
-              <div class="filter-controls">
-                <select class="filter-select departmentFilterSelect" aria-label="Filter by department">
-                  <option value="All">All Departments</option>
-                  <option value="Cardiology">Cardiology</option>
-                  <option value="Pediatrics">Pediatrics</option>
-                  <option value="Orthopedics">Orthopedics</option>
-                  <option value="Neurology">Neurology</option>
+              <div class="filter-controls" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <select id="patientsGenderFilter" class="filter-select" aria-label="Filter by gender">
+                  <option value="All">All Genders</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                <select id="patientsBloodFilter" class="filter-select" aria-label="Filter by blood group">
+                  <option value="All">All Blood Groups</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
+                <select id="patientsStatusFilter" class="filter-select" aria-label="Filter by status">
+                  <option value="All">All Statuses</option>
+                  <option value="Admitted">Admitted</option>
+                  <option value="Discharged">Discharged</option>
                 </select>
               </div>
             </div>
@@ -775,68 +798,28 @@
                   <tr>
                     <th scope="col">Patient ID</th>
                     <th scope="col">Patient Name</th>
+                    <th scope="col">Age/Gender</th>
+                    <th scope="col">Blood Group</th>
                     <th scope="col">Admission Date</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Assigned Doctor</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>#SH-26-904</strong></td>
-                    <td>Kamran Shah</td>
-                    <td>July 02, 2026</td>
-                    <td>Cardiology</td>
-                    <td>Dr. Asif Kamal</td>
-                    <td><span class="badge badge-success">Admitted</span></td>
-                    <td>
-                      <div class="row-actions">
-                        <button class="action-btn-circle" title="View Patient File">
-                          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                        </button>
-                        <button class="action-btn-circle dischargePatientBtn danger" title="Discharge Patient">
-                          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>#SH-26-903</strong></td>
-                    <td>Ayesha Bibi</td>
-                    <td>July 02, 2026</td>
-                    <td>Pediatrics</td>
-                    <td>Dr. Maria Noor</td>
-                    <td><span class="badge badge-warning">Observation</span></td>
-                    <td>
-                      <div class="row-actions">
-                        <button class="action-btn-circle" title="View Patient File">
-                          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                        </button>
-                        <button class="action-btn-circle dischargePatientBtn danger" title="Discharge Patient">
-                          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>#SH-26-899</strong></td>
-                    <td>Haris Mahmood</td>
-                    <td>July 01, 2026</td>
-                    <td>Orthopedics</td>
-                    <td>Dr. Faisal Malik</td>
-                    <td><span class="badge badge-info">Discharged</span></td>
-                    <td>
-                      <div class="row-actions">
-                        <button class="action-btn-circle" title="View Patient File">
-                          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                <tbody id="patientsTableBody">
+                  <!-- Dynamic content will be loaded here -->
                 </tbody>
               </table>
             </div>
+            
+            <!-- Pagination Controls -->
+            <div class="pagination-container" id="patientsPagination" style="display: flex; justify-content: flex-end; align-items: center; padding: 1rem; gap: 1rem; border-top: 1px solid var(--border-light);">
+              <span id="patientsPageInfo" style="font-size: 0.875rem; color: var(--text-secondary);">Showing 0-0 of 0</span>
+              <div style="display: flex; gap: 0.5rem;">
+                <button id="patientsPrevPage" class="btn-secondary" style="padding: 0.25rem 0.75rem;" disabled>&lt;</button>
+                <button id="patientsNextPage" class="btn-secondary" style="padding: 0.25rem 0.75rem;" disabled>&gt;</button>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -959,55 +942,129 @@
             </div>
           </div>
 
-          <!-- Shifts log -->
+          <!-- Doctors Directory -->
           <div class="section-card" style="margin-top: 1.75rem;">
-            <div class="card-header">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
               <div class="card-title">
-                <h3>Active Shifts Directory</h3>
-                <p>On-duty roster records</p>
+                <h3>Doctors Directory</h3>
+                <p>Manage hospital physicians and shifts</p>
+              </div>
+              <div class="header-actions">
+                <button class="btn-primary openAddDoctorModalBtn">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                  </svg>
+                  Add Doctor
+                </button>
+              </div>
+            </div>
+
+            <!-- Search & Filters Toolbar -->
+            <div class="toolbar-actions" style="flex-wrap: wrap; gap: 1rem; padding-top: 1rem;">
+              <div class="search-bar-container" style="flex: 1; min-width: 250px;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="search" id="doctorsSearchInput" placeholder="Search by name, ID or specialization..." class="search-input" aria-label="Search doctors">
+              </div>
+              <div class="filter-controls" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <select id="doctorsDeptFilter" class="filter-select" aria-label="Filter by department">
+                  <option value="All">All Departments</option>
+                  <option value="Cardiology">Cardiology</option>
+                  <option value="Pediatrics">Pediatrics</option>
+                  <option value="Orthopedics">Orthopedics</option>
+                  <option value="Neurology">Neurology</option>
+                </select>
+                <select id="doctorsAvailabilityFilter" class="filter-select" aria-label="Filter by availability">
+                  <option value="All">All Statuses</option>
+                  <option value="Active">Active</option>
+                  <option value="On Leave">On Leave</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
               </div>
             </div>
             
             <div class="table-wrapper">
-              <table class="admissions-table">
+              <table class="admissions-table" id="doctorsDirTable">
                 <thead>
                   <tr>
-                    <th>Doctor Name</th>
-                    <th>Speciality Department</th>
-                    <th>Duty Hours</th>
-                    <th>Zone</th>
-                    <th>Duty Status</th>
+                    <th>Doctor ID</th>
+                    <th>Full Name</th>
+                    <th>Department</th>
+                    <th>Specialization</th>
+                    <th>Shift</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="doctorsTableBody">
+                  <!-- Dynamic content -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5.5: STAFF VIEW -->
+        <section id="staff-view" class="dashboard-section">
+          <div class="page-header">
+            <div class="page-title">
+              <h2>Staff Management</h2>
+              <p>Manage hospital staff, nurses, and administrative personnel.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn-primary openAddStaffModalBtn">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                </svg>
+                Add Staff
+              </button>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <!-- Search & Filters Toolbar -->
+            <div class="toolbar-actions" style="flex-wrap: wrap; gap: 1rem;">
+              <div class="search-bar-container" style="flex: 1; min-width: 250px;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="search" id="staffSearchInput" placeholder="Search by name, ID or role..." class="search-input" aria-label="Search staff">
+              </div>
+              <div class="filter-controls" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <select id="staffDeptFilter" class="filter-select" aria-label="Filter by department">
+                  <option value="All">All Departments</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Nursing">Nursing</option>
+                  <option value="Pharmacy">Pharmacy</option>
+                  <option value="Maintenance">Maintenance</option>
+                </select>
+                <select id="staffRoleFilter" class="filter-select" aria-label="Filter by role">
+                  <option value="All">All Roles</option>
+                  <option value="Nurse">Nurse</option>
+                  <option value="Receptionist">Receptionist</option>
+                  <option value="Technician">Technician</option>
+                  <option value="Manager">Manager</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Staff Data table -->
+            <div class="table-wrapper">
+              <table class="admissions-table" id="staffDirTable">
+                <thead>
                   <tr>
-                    <td><strong>Dr. Sarah Khan</strong></td>
-                    <td>Cardiology</td>
-                    <td>08:00 AM - 04:00 PM</td>
-                    <td>Wing B (Floor 4)</td>
-                    <td><span class="badge badge-success">On Duty</span></td>
+                    <th>Staff ID</th>
+                    <th>Full Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Shift</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                  <tr>
-                    <td><strong>Dr. Asif Kamal</strong></td>
-                    <td>Cardiology</td>
-                    <td>08:00 AM - 04:00 PM</td>
-                    <td>Wing B (Floor 4)</td>
-                    <td><span class="badge badge-success">On Duty</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Dr. Maria Noor</strong></td>
-                    <td>Pediatrics</td>
-                    <td>04:00 PM - 12:00 AM</td>
-                    <td>Wing C (Floor 2)</td>
-                    <td><span class="badge badge-warning">On Standby</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Dr. Faisal Malik</strong></td>
-                    <td>Orthopedics</td>
-                    <td>12:00 AM - 08:00 AM</td>
-                    <td>Wing A (Floor 1)</td>
-                    <td><span class="badge badge-info">Off Duty</span></td>
-                  </tr>
+                </thead>
+                <tbody id="staffTableBody">
+                  <!-- Dynamic content -->
                 </tbody>
               </table>
             </div>
@@ -1143,80 +1200,137 @@
     </div>
   </div>
 
-  <!-- --- GLASSMORPHISM REGISTRATION MODAL PANEL --- -->
-  <div class="modal-backdrop" id="registrationModalBackdrop">
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
+
+  <!-- PATIENT REGISTRATION/EDIT MODAL -->
+  <div class="modal-backdrop" id="patientModalBackdrop">
     <div class="modal-container">
       <header class="modal-header">
-        <h3 id="modalTitleLabel">Register New Admission</h3>
-        <button class="close-modal-btn" id="closeModalBtn" aria-label="Close Registration Form">&times;</button>
+        <h3 id="patientModalTitle">Register Patient</h3>
+        <button class="close-modal-btn" id="closePatientModalBtn" aria-label="Close Form">&times;</button>
       </header>
-
-      <!-- Registration Form -->
-      <form id="patientRegistrationForm" novalidate>
+      <form id="patientForm" novalidate>
+        <input type="hidden" id="patientId">
         <div class="modal-form-grid">
-          
-          <div class="form-group-full">
-            <div class="form-field-wrapper">
-              <label for="regPatientName">Full Name</label>
-              <input type="text" id="regPatientName" class="form-input-element" placeholder="e.g. Kamran Shah" required>
-            </div>
+          <div class="form-group-full"><div class="form-field-wrapper"><label>Full Name</label><input type="text" id="pFullName" class="form-input-element" required></div></div>
+          <div class="form-field-wrapper"><label>Age</label><input type="number" id="pAge" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Gender</label>
+            <select id="pGender" class="form-input-element"><option>Male</option><option>Female</option><option>Other</option></select>
           </div>
-
-          <div class="form-field-wrapper">
-            <label for="regPatientAge">Age</label>
-            <input type="number" id="regPatientAge" class="form-input-element" placeholder="e.g. 34" min="0" max="120" required>
+          <div class="form-field-wrapper"><label>Blood Group</label>
+            <select id="pBlood" class="form-input-element"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select>
           </div>
-
-          <div class="form-field-wrapper">
-            <label for="regPatientGender">Gender</label>
-            <select id="regPatientGender" class="form-input-element" aria-label="Choose gender">
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
+          <div class="form-field-wrapper"><label>CNIC</label><input type="text" id="pCnic" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Phone Number</label><input type="text" id="pPhone" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Email</label><input type="email" id="pEmail" class="form-input-element"></div>
+          <div class="form-group-full"><div class="form-field-wrapper"><label>Address</label><input type="text" id="pAddress" class="form-input-element" required></div></div>
+          <div class="form-field-wrapper"><label>Disease</label><input type="text" id="pDisease" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Assigned Doctor</label><input type="text" id="pDoctor" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Admission Date</label><input type="date" id="pDate" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Status</label>
+            <select id="pStatus" class="form-input-element"><option>Admitted</option><option>Discharged</option></select>
           </div>
-
-          <div class="form-field-wrapper">
-            <label for="regPatientDept">Department</label>
-            <select id="regPatientDept" class="form-input-element" aria-label="Choose clinical department">
-              <option value="Cardiology">Cardiology</option>
-              <option value="Pediatrics">Pediatrics</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Neurology">Neurology</option>
-            </select>
-          </div>
-
-          <div class="form-field-wrapper">
-            <label for="regPatientDoctor">Assigned Practitioner</label>
-            <select id="regPatientDoctor" class="form-input-element" aria-label="Choose doctor">
-              <option value="Dr. Asif Kamal">Dr. Asif Kamal</option>
-              <option value="Dr. Sarah Khan">Dr. Sarah Khan</option>
-              <option value="Dr. Maria Noor">Dr. Maria Noor</option>
-              <option value="Dr. Faisal Malik">Dr. Faisal Malik</option>
-            </select>
-          </div>
-
-          <div class="form-group-full">
-            <div class="form-field-wrapper">
-              <label for="regPatientStatus">Admission Status</label>
-              <select id="regPatientStatus" class="form-input-element" aria-label="Choose admission status">
-                <option value="Admitted">Admitted</option>
-                <option value="Observation">Observation</option>
-              </select>
-            </div>
-          </div>
-
         </div>
-
         <footer class="modal-footer">
-          <button type="button" class="btn-secondary" id="cancelRegistrationBtn">Cancel</button>
-          <button type="submit" class="btn-primary" id="saveRegistrationBtn">Save Admission</button>
+          <button type="button" class="btn-secondary" id="cancelPatientBtn">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
         </footer>
       </form>
     </div>
   </div>
 
+  <!-- DOCTOR REGISTRATION/EDIT MODAL -->
+  <div class="modal-backdrop" id="doctorModalBackdrop">
+    <div class="modal-container">
+      <header class="modal-header">
+        <h3 id="doctorModalTitle">Add Doctor</h3>
+        <button class="close-modal-btn" id="closeDoctorModalBtn" aria-label="Close Form">&times;</button>
+      </header>
+      <form id="doctorForm" novalidate>
+        <input type="hidden" id="doctorId">
+        <div class="modal-form-grid">
+          <div class="form-group-full"><div class="form-field-wrapper"><label>Full Name</label><input type="text" id="dFullName" class="form-input-element" required></div></div>
+          <div class="form-field-wrapper"><label>Department</label><input type="text" id="dDept" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Specialization</label><input type="text" id="dSpec" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Qualification</label><input type="text" id="dQual" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Experience (Years)</label><input type="number" id="dExp" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Phone</label><input type="text" id="dPhone" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Email</label><input type="email" id="dEmail" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Shift</label><input type="text" id="dShift" class="form-input-element" placeholder="e.g. 08:00 AM - 04:00 PM" required></div>
+          <div class="form-field-wrapper"><label>Available Days</label><input type="text" id="dDays" class="form-input-element" placeholder="e.g. Mon - Fri" required></div>
+          <div class="form-field-wrapper"><label>Status</label>
+            <select id="dStatus" class="form-input-element"><option>Active</option><option>On Leave</option><option>Inactive</option></select>
+          </div>
+        </div>
+        <footer class="modal-footer">
+          <button type="button" class="btn-secondary" id="cancelDoctorBtn">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- STAFF REGISTRATION/EDIT MODAL -->
+  <div class="modal-backdrop" id="staffModalBackdrop">
+    <div class="modal-container">
+      <header class="modal-header">
+        <h3 id="staffModalTitle">Add Staff</h3>
+        <button class="close-modal-btn" id="closeStaffModalBtn" aria-label="Close Form">&times;</button>
+      </header>
+      <form id="staffForm" novalidate>
+        <input type="hidden" id="staffId">
+        <div class="modal-form-grid">
+          <div class="form-group-full"><div class="form-field-wrapper"><label>Full Name</label><input type="text" id="sFullName" class="form-input-element" required></div></div>
+          <div class="form-field-wrapper"><label>Role</label><input type="text" id="sRole" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Department</label><input type="text" id="sDept" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Phone</label><input type="text" id="sPhone" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Email</label><input type="email" id="sEmail" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Joining Date</label><input type="date" id="sDate" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Shift</label><input type="text" id="sShift" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Salary</label><input type="number" id="sSalary" class="form-input-element" required></div>
+          <div class="form-field-wrapper"><label>Status</label>
+            <select id="sStatus" class="form-input-element"><option>Active</option><option>On Leave</option><option>Inactive</option></select>
+          </div>
+        </div>
+        <footer class="modal-footer">
+          <button type="button" class="btn-secondary" id="cancelStaffBtn">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- VIEW PROFILE MODAL -->
+  <div class="modal-backdrop" id="viewModalBackdrop">
+    <div class="modal-container" style="max-width: 500px;">
+      <header class="modal-header">
+        <h3>Profile Details</h3>
+        <button class="close-modal-btn" id="closeViewModalBtn" aria-label="Close Profile">&times;</button>
+      </header>
+      <div id="viewModalContent" style="padding: 1.5rem; line-height: 1.6; max-height: 60vh; overflow-y: auto;">
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal-backdrop" id="confirmModalBackdrop">
+    <div class="modal-container" style="max-width: 400px; text-align: center;">
+      <header class="modal-header" style="justify-content: center; border-bottom: none;">
+        <h3>Confirm Action</h3>
+      </header>
+      <div style="padding: 1rem;">
+        <p id="confirmMessage">Are you sure you want to proceed?</p>
+      </div>
+      <footer class="modal-footer" style="justify-content: center; border-top: none;">
+        <button type="button" class="btn-secondary" id="cancelConfirmBtn">Cancel</button>
+        <button type="button" class="btn-primary" id="proceedConfirmBtn" style="background-color: var(--color-danger);">Delete</button>
+      </footer>
+    </div>
+  </div>
+
   <!-- Load dashboard behavior -->
   <script src="js/app.js"></script>
+  <script src="js/api.js"></script>
 </body>
 </html>
