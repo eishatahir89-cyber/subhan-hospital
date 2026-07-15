@@ -1469,13 +1469,17 @@ button {
 .modal-container {
   width: 100%;
   max-width: 520px;
+  max-height: 90vh;
   background-color: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg), 0 20px 40px rgba(0, 0, 0, 0.1);
-  padding: 2.25rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
   transform: translateY(-30px);
   transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden;
 }
 
 .modal-backdrop.open .modal-container {
@@ -1486,11 +1490,13 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.75rem;
+  flex-shrink: 0;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .modal-header h3 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -1507,11 +1513,33 @@ button {
 }
 
 /* Form Styles inside Modal */
+/* Make the form itself the scrolling container */
+.modal-container form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .modal-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-bottom: 2rem;
+  gap: 0.9rem 1.1rem;
+  margin-bottom: 0;
+  padding: 1.25rem 2rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Custom scrollbar inside modal */
+.modal-form-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-form-grid::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
 }
 
 .form-group-full {
@@ -1533,15 +1561,18 @@ button {
 }
 
 .form-input-element {
-  padding: 0.7rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem 0.9rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
   background-color: var(--bg-input);
   color: var(--text-main);
   outline: none;
   font-family: inherit;
-  font-size: 0.925rem;
+  font-size: 0.9rem;
   transition: all 0.25s ease;
+  min-width: 0;
 }
 
 .form-input-element:focus {
@@ -1554,6 +1585,10 @@ button {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
+  flex-shrink: 0;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--border-light);
+  background-color: var(--bg-card);
 }
 
 .btn-secondary {
@@ -2636,4 +2671,105 @@ button {
 .empty-state p {
   font-size: 1rem;
   font-weight: 500;
+}
+.invoice-print-container {
+  background: white !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.invoice-print-container * {
+  color: #0f172a !important;
+}
+
+
+/* ==========================================
+   RESPONSIVE MODAL FIXES
+   ========================================== */
+
+/* Laptop / medium screens (≤ 1024px) */
+@media (max-width: 1024px) {
+  .modal-container {
+    max-width: 480px;
+  }
+
+  .modal-form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .modal-header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .modal-footer {
+    padding: 0.9rem 1.5rem;
+  }
+}
+
+/* Small screens / tablets (≤ 768px) */
+@media (max-width: 768px) {
+  .modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-container {
+    max-width: 100%;
+    width: 100%;
+    max-height: 92vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transform: translateY(100%);
+  }
+
+  .modal-backdrop.open .modal-container {
+    transform: translateY(0);
+  }
+
+  .modal-form-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem 1.25rem;
+    gap: 0.7rem;
+  }
+
+  .form-group-full {
+    grid-column: span 1;
+  }
+
+  .modal-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .modal-footer {
+    padding: 0.85rem 1.25rem;
+  }
+}
+
+/* Mobile phones (≤ 480px) */
+@media (max-width: 480px) {
+  .modal-container {
+    max-height: 95vh;
+  }
+
+  .modal-form-grid {
+    padding: 0.85rem 1rem;
+    gap: 0.6rem;
+  }
+
+  .modal-header {
+    padding: 0.85rem 1rem;
+  }
+
+  .modal-footer {
+    padding: 0.75rem 1rem;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .modal-footer .btn-primary,
+  .modal-footer .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
 }

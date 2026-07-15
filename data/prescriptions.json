@@ -1,0 +1,41 @@
+[
+  {
+    "id": "PRE-2",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "doctorId": "DOC-3",
+    "doctorName": "Dr. Maria Noor",
+    "diagnosis": "Acute Asthma Exacerbation",
+    "medicines": "Ventolin Inhaler, Ventolin Syrup",
+    "dosage": "2 puffs as needed, 1 tsp twice a day",
+    "duration": "7 Days",
+    "notes": "Keep inhaler handy at all times.",
+    "date": "2026-07-14"
+  },
+  {
+    "id": "PRE-1783981465040",
+    "patientId": "PAT-1",
+    "patientName": "Kamran Shah",
+    "doctorId": "DOC-3",
+    "doctorName": "Dr. Maria Noor",
+    "diagnosis": ";lkjhfds",
+    "medicines": "dgflkj;",
+    "dosage": "ghjbkn",
+    "duration": "lkjhbvc",
+    "date": "2026-07-13",
+    "notes": "esrtdyughvhjb,"
+  },
+  {
+    "id": "PRE-1784107624021",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "doctorId": "DOC-3",
+    "doctorName": "Dr. Maria Noor",
+    "diagnosis": "High fever ,cough ",
+    "medicines": "Panadol ",
+    "dosage": "1_0_1",
+    "duration": "7 days ",
+    "date": "2026-07-15",
+    "notes": ""
+  }
+]

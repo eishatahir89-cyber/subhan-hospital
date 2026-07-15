@@ -1,0 +1,41 @@
+[
+  {
+    "id": "BIL-1",
+    "patientId": "PAT-1",
+    "patientName": "Kamran Shah",
+    "doctorId": "DOC-1",
+    "doctorName": "Dr. Sarah Khan",
+    "services": "Cardiology Consultation: $150, ECG Scan: $100",
+    "medicines": "Lisinopril 10mg: $30, Amlodipine 5mg: $20",
+    "totalAmount": 300,
+    "paymentMethod": "Cash",
+    "paymentStatus": "Paid",
+    "invoiceDate": "2026-07-14"
+  },
+  {
+    "id": "BIL-2",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "doctorId": "DOC-3",
+    "doctorName": "Dr. Maria Noor",
+    "services": "Pediatric consultation: $80, Asthma therapy: $40",
+    "medicines": "Ventolin Syrup: $10",
+    "totalAmount": 130,
+    "paymentMethod": "Card",
+    "paymentStatus": "Unpaid",
+    "invoiceDate": "2026-07-14"
+  },
+  {
+    "id": "BIL-3",
+    "patientId": "PAT-3",
+    "patientName": "Haris Mahmood",
+    "doctorId": "DOC-1",
+    "doctorName": "Dr. Sarah Khan",
+    "services": "Orthopedic consultation: $100, Knee MRI Scan: $900",
+    "medicines": "Painkillers: $50, Knee Brace: $50",
+    "totalAmount": 1100,
+    "paymentMethod": "Insurance",
+    "paymentStatus": "Paid",
+    "invoiceDate": "2026-07-01"
+  }
+]

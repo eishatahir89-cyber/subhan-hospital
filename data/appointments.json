@@ -1,0 +1,62 @@
+[
+  {
+    "id": "APT-1",
+    "patientId": "PAT-1",
+    "patientName": "Kamran Shah",
+    "doctorId": "DOC-1",
+    "doctorName": "Dr. Sarah Khan",
+    "department": "Cardiology",
+    "date": "2026-07-14",
+    "time": "09:30 AM",
+    "status": "Scheduled",
+    "notes": "Follow-up consultation after cardiovascular checkup."
+  },
+  {
+    "id": "APT-2",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "doctorId": "DOC-3",
+    "doctorName": "Dr. Maria Noor",
+    "department": "Pediatrics",
+    "date": "2026-07-14",
+    "time": "03:00 PM",
+    "status": "Scheduled",
+    "notes": "Routine vaccination visit."
+  },
+  {
+    "id": "APT-3",
+    "patientId": "PAT-3",
+    "patientName": "Haris Mahmood",
+    "doctorId": "DOC-1",
+    "doctorName": "Dr. Sarah Khan",
+    "department": "Cardiology",
+    "date": "2026-07-13",
+    "time": "02:00 PM",
+    "status": "Completed",
+    "notes": "Post-Op ECG Review. Patient is recovering well."
+  },
+  {
+    "id": "APT-1783981281002",
+    "patientId": "PAT-3",
+    "patientName": "Haris Mahmood",
+    "doctorId": "DOC-1",
+    "doctorName": "Dr. Sarah Khan",
+    "department": "Cardiology",
+    "date": "2026-07-13",
+    "time": "10:30 pm",
+    "status": "Scheduled",
+    "notes": ""
+  },
+  {
+    "id": "APT-1784056821946",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "doctorId": "DOC-2",
+    "doctorName": "Dr. Asif Kamal",
+    "department": "Neurology",
+    "date": "2026-07-14",
+    "time": "10:30 pm",
+    "status": "Scheduled",
+    "notes": " am suffering from Severe headache "
+  }
+]

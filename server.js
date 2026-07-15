@@ -37,130 +37,78 @@ const writeData = async (filename, data) => {
 
 const generateId = (prefix) => `${prefix}-${Date.now()}`;
 
-// === PATIENTS API === //
+// Define api router
+const apiRouter = express.Router();
 
-app.get('/patients', async (req, res) => {
-    const patients = await readData('patients.json');
-    res.json(patients);
-});
+// Generic helper to create CRUD endpoints for a module
+const registerCrud = (router, routeName, filename, idPrefix) => {
+    // GET all
+    router.get(`/${routeName}`, async (req, res) => {
+        const data = await readData(filename);
+        res.json(data);
+    });
 
-app.get('/patients/:id', async (req, res) => {
-    const patients = await readData('patients.json');
-    const patient = patients.find(p => p.id === req.params.id);
-    if (patient) res.json(patient);
-    else res.status(404).json({ message: 'Patient not found' });
-});
+    // GET single
+    router.get(`/${routeName}/:id`, async (req, res) => {
+        const data = await readData(filename);
+        const item = data.find(i => i.id === req.params.id);
+        if (item) res.json(item);
+        else res.status(404).json({ message: `${routeName} not found` });
+    });
 
-app.post('/patients', async (req, res) => {
-    const patients = await readData('patients.json');
-    const newPatient = { id: generateId('PAT'), ...req.body };
-    patients.push(newPatient);
-    await writeData('patients.json', patients);
-    res.status(201).json(newPatient);
-});
+    // POST create
+    router.post(`/${routeName}`, async (req, res) => {
+        const data = await readData(filename);
+        const newId = generateId(idPrefix);
+        const newItem = { id: newId, ...req.body };
 
-app.put('/patients/:id', async (req, res) => {
-    let patients = await readData('patients.json');
-    const index = patients.findIndex(p => p.id === req.params.id);
-    if (index !== -1) {
-        patients[index] = { ...patients[index], ...req.body };
-        await writeData('patients.json', patients);
-        res.json(patients[index]);
-    } else {
-        res.status(404).json({ message: 'Patient not found' });
-    }
-});
+        // Auto-populate ID fields in body if needed (e.g. patientId, doctorId, etc.)
+        if (routeName === 'patients') newItem.patientId = newId;
+        else if (routeName === 'doctors') newItem.doctorId = newId;
+        else if (routeName === 'staff') newItem.staffId = newId;
 
-app.delete('/patients/:id', async (req, res) => {
-    let patients = await readData('patients.json');
-    patients = patients.filter(p => p.id !== req.params.id);
-    await writeData('patients.json', patients);
-    res.status(204).send();
-});
+        data.push(newItem);
+        await writeData(filename, data);
+        res.status(201).json(newItem);
+    });
 
+    // PUT update
+    router.put(`/${routeName}/:id`, async (req, res) => {
+        let data = await readData(filename);
+        const index = data.findIndex(i => i.id === req.params.id);
+        if (index !== -1) {
+            data[index] = { ...data[index], ...req.body };
+            await writeData(filename, data);
+            res.json(data[index]);
+        } else {
+            res.status(404).json({ message: `${routeName} not found` });
+        }
+    });
 
-// === DOCTORS API === //
+    // DELETE
+    router.delete(`/${routeName}/:id`, async (req, res) => {
+        let data = await readData(filename);
+        data = data.filter(i => i.id !== req.params.id);
+        await writeData(filename, data);
+        res.status(204).send();
+    });
+};
 
-app.get('/doctors', async (req, res) => {
-    const doctors = await readData('doctors.json');
-    res.json(doctors);
-});
+// Register CRUD routes for all modules
+registerCrud(apiRouter, 'patients', 'patients.json', 'PAT');
+registerCrud(apiRouter, 'doctors', 'doctors.json', 'DOC');
+registerCrud(apiRouter, 'appointments', 'appointments.json', 'APT');
+registerCrud(apiRouter, 'staff', 'staff.json', 'STF');
+registerCrud(apiRouter, 'prescriptions', 'prescriptions.json', 'PRE');
+registerCrud(apiRouter, 'medical-history', 'medical-history.json', 'MED');
+registerCrud(apiRouter, 'inventory', 'inventory.json', 'INV');
+registerCrud(apiRouter, 'billing', 'billing.json', 'BIL');
 
-app.get('/doctors/:id', async (req, res) => {
-    const doctors = await readData('doctors.json');
-    const doctor = doctors.find(d => d.id === req.params.id);
-    if (doctor) res.json(doctor);
-    else res.status(404).json({ message: 'Doctor not found' });
-});
+// Mount router on both /api and / routes to support direct frontend calls and base proxy calls
+app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
-app.post('/doctors', async (req, res) => {
-    const doctors = await readData('doctors.json');
-    const newDoctor = { id: generateId('DOC'), ...req.body };
-    doctors.push(newDoctor);
-    await writeData('doctors.json', doctors);
-    res.status(201).json(newDoctor);
-});
-
-app.put('/doctors/:id', async (req, res) => {
-    let doctors = await readData('doctors.json');
-    const index = doctors.findIndex(d => d.id === req.params.id);
-    if (index !== -1) {
-        doctors[index] = { ...doctors[index], ...req.body };
-        await writeData('doctors.json', doctors);
-        res.json(doctors[index]);
-    } else {
-        res.status(404).json({ message: 'Doctor not found' });
-    }
-});
-
-app.delete('/doctors/:id', async (req, res) => {
-    let doctors = await readData('doctors.json');
-    doctors = doctors.filter(d => d.id !== req.params.id);
-    await writeData('doctors.json', doctors);
-    res.status(204).send();
-});
-
-
-// === STAFF API === //
-
-app.get('/staff', async (req, res) => {
-    const staff = await readData('staff.json');
-    res.json(staff);
-});
-
-app.get('/staff/:id', async (req, res) => {
-    const staffList = await readData('staff.json');
-    const staff = staffList.find(s => s.id === req.params.id);
-    if (staff) res.json(staff);
-    else res.status(404).json({ message: 'Staff not found' });
-});
-
-app.post('/staff', async (req, res) => {
-    const staffList = await readData('staff.json');
-    const newStaff = { id: generateId('STF'), ...req.body };
-    staffList.push(newStaff);
-    await writeData('staff.json', staffList);
-    res.status(201).json(newStaff);
-});
-
-app.put('/staff/:id', async (req, res) => {
-    let staffList = await readData('staff.json');
-    const index = staffList.findIndex(s => s.id === req.params.id);
-    if (index !== -1) {
-        staffList[index] = { ...staffList[index], ...req.body };
-        await writeData('staff.json', staffList);
-        res.json(staffList[index]);
-    } else {
-        res.status(404).json({ message: 'Staff not found' });
-    }
-});
-
-app.delete('/staff/:id', async (req, res) => {
-    let staffList = await readData('staff.json');
-    staffList = staffList.filter(s => s.id !== req.params.id);
-    await writeData('staff.json', staffList);
-    res.status(204).send();
-});
+// Serve main entry page at root URL
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "login.html"));
 });

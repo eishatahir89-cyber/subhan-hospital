@@ -1,0 +1,35 @@
+[
+  {
+    "id": "MED-1",
+    "patientId": "PAT-1",
+    "patientName": "Kamran Shah",
+    "diseases": "Hypertension, Seasonal Allergies",
+    "allergies": "Penicillin",
+    "surgeries": "Appendectomy (2018)",
+    "labReports": "Blood Chemistry Panel: Normal Glucose, Elevated Cholesterol.",
+    "prescriptions": "Lisinopril 10mg, Amlodipine 5mg",
+    "visitHistory": "2026-07-02: General consult; 2026-07-14: Cardiology follow-up."
+  },
+  {
+    "id": "MED-2",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "diseases": "Asthma, Eczema",
+    "allergies": "Dust Mites, Peanuts",
+    "surgeries": "None",
+    "labReports": "IgE Allergy Test: Positive for Peanuts.",
+    "prescriptions": "Ventolin Inhaler",
+    "visitHistory": "2026-07-10: Pediatric checkup; 2026-07-14: Routine vaccination."
+  },
+  {
+    "id": "MED-1784108103320",
+    "patientId": "PAT-2",
+    "patientName": "Ayesha Bibi",
+    "diseases": "Hypertension ",
+    "allergies": "Pencilline Peanuts ",
+    "surgeries": "Appendus",
+    "labReports": "Not well",
+    "prescriptions": "Headache ,Fatigue ",
+    "visitHistory": "2026_10_17"
+  }
+]

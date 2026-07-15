@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": "DOC-1",
+    "doctorId": "DOC-1",
+    "fullName": "Dr. Sarah Khan",
+    "department": "Cardiology",
+    "specialization": "Cardiologist",
+    "qualification": "MBBS, FCPS (Cardiology)",
+    "experienceYears": "12",
+    "phone": "0300-1112223",
+    "email": "sarah.khan@subhan.com",
+    "shift": "08:00 AM - 04:00 PM",
+    "availableDays": "Mon - Fri",
+    "status": "Active"
+  },
+  {
+    "id": "DOC-2",
+    "doctorId": "DOC-2",
+    "fullName": "Dr. Asif Kamal",
+    "department": "Neurology",
+    "specialization": "Neurologist",
+    "qualification": "MBBS, MD (Neurology)",
+    "experienceYears": "15",
+    "phone": "0300-4445556",
+    "email": "asif.kamal@subhan.com",
+    "shift": "08:00 AM - 04:00 PM",
+    "availableDays": "Mon - Thu",
+    "status": "Active"
+  },
+  {
+    "id": "DOC-3",
+    "doctorId": "DOC-3",
+    "fullName": "Dr. Maria Noor",
+    "department": "Pediatrics",
+    "specialization": "Pediatrician",
+    "qualification": "MBBS, DCH",
+    "experienceYears": "8",
+    "phone": "0300-7778889",
+    "email": "maria.noor@subhan.com",
+    "shift": "02:00 PM - 10:00 PM",
+    "availableDays": "Mon - Fri",
+    "status": "Active"
+  }
+]

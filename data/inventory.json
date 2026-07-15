@@ -1,0 +1,62 @@
+[
+  {
+    "id": "INV-1",
+    "name": "Paracetamol 500mg",
+    "category": "Medicine",
+    "quantity": 150,
+    "supplier": "Alpha Pharma",
+    "unitPrice": 1.5,
+    "expiryDate": "2027-12-31",
+    "status": "In Stock"
+  },
+  {
+    "id": "INV-2",
+    "name": "Digital Sphygmomanometer",
+    "category": "Medical Equipment",
+    "quantity": 5,
+    "supplier": "MedTech Devices",
+    "unitPrice": 45,
+    "expiryDate": "2030-01-01",
+    "status": "Low Stock"
+  },
+  {
+    "id": "INV-3",
+    "name": "Lisinopril 10mg",
+    "category": "Medicine",
+    "quantity": 250,
+    "supplier": "Delta Lab Supplies",
+    "unitPrice": 2.2,
+    "expiryDate": "2027-06-30",
+    "status": "In Stock"
+  },
+  {
+    "id": "INV-4",
+    "name": "Surgical Mask Box (50pcs)",
+    "category": "Medical Equipment",
+    "quantity": 0,
+    "supplier": "SafeCare Ltd",
+    "unitPrice": 8,
+    "expiryDate": "2029-05-15",
+    "status": "Out of Stock"
+  },
+  {
+    "id": "INV-1784108940052",
+    "name": "Digital Sphygmomanometer",
+    "category": "Medicine",
+    "quantity": 26,
+    "supplier": ";kltrdfyughjvkbln",
+    "unitPrice": 0.04,
+    "expiryDate": "2026-07-21",
+    "status": "In Stock"
+  },
+  {
+    "id": "INV-1784109084720",
+    "name": "Paracetamol 500mg",
+    "category": "Medical Equipment",
+    "quantity": 200,
+    "supplier": "Alpha pharmacy",
+    "unitPrice": 0.05,
+    "expiryDate": "2026-07-22",
+    "status": "In Stock"
+  }
+]

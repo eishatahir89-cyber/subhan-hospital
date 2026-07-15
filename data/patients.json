@@ -1,1 +1,53 @@
-[]
+[
+  {
+    "id": "PAT-1",
+    "patientId": "PAT-1",
+    "fullName": "Kamran Shah",
+    "age": "45",
+    "gender": "Male",
+    "bloodGroup": "A+",
+    "cnic": "42101-1234567-1",
+    "phone": "0300-1234567",
+    "email": "kamran@gmail.com",
+    "address": "Street 5, Area A, Karachi",
+    "disease": "Hypertension",
+    "assignedDoctor": "Dr. Sarah Khan",
+    "admissionDate": "2026-07-02",
+    "status": "Admitted",
+    "createdAt": "2026-07-02T10:00:00.000Z"
+  },
+  {
+    "id": "PAT-2",
+    "patientId": "PAT-2",
+    "fullName": "Ayesha Bibi",
+    "age": "8",
+    "gender": "Female",
+    "bloodGroup": "O+",
+    "cnic": "42101-7654321-2",
+    "phone": "0321-7654321",
+    "email": "parents@ayesha.com",
+    "address": "Apartment 3B, Sector C, Islamabad",
+    "disease": "Asthma",
+    "assignedDoctor": "Dr. Maria Noor",
+    "admissionDate": "2026-07-10",
+    "status": "Admitted",
+    "createdAt": "2026-07-10T12:00:00.000Z"
+  },
+  {
+    "id": "PAT-3",
+    "patientId": "PAT-3",
+    "fullName": "Haris Mahmood",
+    "age": "32",
+    "gender": "Male",
+    "bloodGroup": "B+",
+    "cnic": "42201-9876543-3",
+    "phone": "0333-9876543",
+    "email": "haris@yahoo.com",
+    "address": "House 12, Lane 4, Lahore",
+    "disease": "Knee Scan / ACL Tear",
+    "assignedDoctor": "Dr. Sarah Khan",
+    "admissionDate": "2026-07-01",
+    "status": "Discharged",
+    "createdAt": "2026-07-01T09:00:00.000Z"
+  }
+]
