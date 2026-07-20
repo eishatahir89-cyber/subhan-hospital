@@ -7,7 +7,8 @@
     "supplier": "Alpha Pharma",
     "unitPrice": 1.5,
     "expiryDate": "2027-12-31",
-    "status": "In Stock"
+    "status": "In Stock",
+    "createdAt": "2026-07-01T08:00:00.000Z"
   },
   {
     "id": "INV-2",
@@ -16,8 +17,9 @@
     "quantity": 5,
     "supplier": "MedTech Devices",
     "unitPrice": 45,
-    "expiryDate": "2030-01-01",
-    "status": "Low Stock"
+    "expiryDate": "",
+    "status": "Low Stock",
+    "createdAt": "2026-07-01T08:00:00.000Z"
   },
   {
     "id": "INV-3",
@@ -27,7 +29,8 @@
     "supplier": "Delta Lab Supplies",
     "unitPrice": 2.2,
     "expiryDate": "2027-06-30",
-    "status": "In Stock"
+    "status": "In Stock",
+    "createdAt": "2026-07-01T08:00:00.000Z"
   },
   {
     "id": "INV-4",
@@ -36,27 +39,52 @@
     "quantity": 0,
     "supplier": "SafeCare Ltd",
     "unitPrice": 8,
-    "expiryDate": "2029-05-15",
-    "status": "Out of Stock"
+    "expiryDate": "",
+    "status": "Out of Stock",
+    "createdAt": "2026-07-01T08:00:00.000Z"
   },
   {
-    "id": "INV-1784108940052",
-    "name": "Digital Sphygmomanometer",
+    "id": "INV-5",
+    "name": "Ventolin Inhaler 100mcg",
     "category": "Medicine",
-    "quantity": 26,
-    "supplier": ";kltrdfyughjvkbln",
-    "unitPrice": 0.04,
-    "expiryDate": "2026-07-21",
-    "status": "In Stock"
+    "quantity": 80,
+    "supplier": "GlaxoSmithKline",
+    "unitPrice": 12.5,
+    "expiryDate": "2027-09-30",
+    "status": "In Stock",
+    "createdAt": "2026-07-05T08:00:00.000Z"
   },
   {
-    "id": "INV-1784109084720",
-    "name": "Paracetamol 500mg",
+    "id": "INV-6",
+    "name": "Diclofenac Sodium 75mg",
+    "category": "Medicine",
+    "quantity": 120,
+    "supplier": "Novartis Pakistan",
+    "unitPrice": 3.8,
+    "expiryDate": "2027-03-31",
+    "status": "In Stock",
+    "createdAt": "2026-07-05T08:00:00.000Z"
+  },
+  {
+    "id": "INV-7",
+    "name": "Stethoscope (Cardiology)",
     "category": "Medical Equipment",
-    "quantity": 200,
-    "supplier": "Alpha pharmacy",
-    "unitPrice": 0.05,
-    "expiryDate": "2026-07-22",
-    "status": "In Stock"
+    "quantity": 8,
+    "supplier": "MedTech Devices",
+    "unitPrice": 95,
+    "expiryDate": "",
+    "status": "In Stock",
+    "createdAt": "2026-07-05T08:00:00.000Z"
+  },
+  {
+    "id": "INV-8",
+    "name": "Amlodipine 5mg",
+    "category": "Medicine",
+    "quantity": 3,
+    "supplier": "Pfizer Pakistan",
+    "unitPrice": 1.8,
+    "expiryDate": "2027-11-30",
+    "status": "Low Stock",
+    "createdAt": "2026-07-06T08:00:00.000Z"
   }
 ]

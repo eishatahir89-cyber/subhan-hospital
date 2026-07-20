@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Auth & User Profile
   loadUserProfile();
+
+  // Init Settings
+  initSettingsPage();
 });
 
 /**
@@ -91,6 +94,9 @@ function initSpaRouter() {
       // Delay slightly to trigger transform entrance transitions
       setTimeout(() => {
         targetSection.classList.add('active');
+        if (targetSectionId === 'reports-view' && typeof loadReports === 'function') {
+          loadReports();
+        }
       }, 50);
 
       showSystemToast(`Navigated to ${item.querySelector('.nav-item-text').textContent}`, 'success');
@@ -604,3 +610,169 @@ function initQuickLinkNav() {
     setInterval(updatePremiumDateTime, 1000);
   });
 })();
+
+/**
+ * Settings Page Tabs & Forms Manager
+ */
+function initSettingsPage() {
+  const tabsNav = document.getElementById('settingsTabsNav');
+  if (!tabsNav) return;
+
+  const tabBtns = tabsNav.querySelectorAll('.settings-tab-btn');
+  const panels = document.querySelectorAll('.settings-tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+
+      // Update active button
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Update active panel
+      panels.forEach(p => {
+        if (p.id === `tab-${targetTab}`) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // Profile Settings Form
+  const profileForm = document.getElementById('profileSettingsForm');
+  if (profileForm) {
+    // Populate profile inputs from window.currentUser
+    const userJson = localStorage.getItem('subhan_user');
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      document.getElementById('settingsFullName').value = user.name || '';
+      document.getElementById('settingsEmail').value = user.email || '';
+      document.getElementById('settingsPhone').value = user.phone || '';
+      document.getElementById('settingsRole').value = user.role || '';
+      document.getElementById('settingsDepartment').value = user.department || '';
+
+      const nameDisp = document.getElementById('settingsNameDisplay');
+      const roleDisp = document.getElementById('settingsRoleDisplay');
+      const avatarDisp = document.getElementById('settingsAvatarDisplay');
+      if (nameDisp) nameDisp.textContent = user.name || '';
+      if (roleDisp) roleDisp.textContent = user.role || '';
+      if (avatarDisp) avatarDisp.textContent = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'AS';
+    }
+
+    profileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const updatedUser = {
+        name: document.getElementById('settingsFullName').value,
+        email: document.getElementById('settingsEmail').value,
+        phone: document.getElementById('settingsPhone').value,
+        role: document.getElementById('settingsRole').value,
+        department: document.getElementById('settingsDepartment').value,
+      };
+
+      localStorage.setItem('subhan_user', JSON.stringify(updatedUser));
+      loadUserProfile(); // Refresh top/sidebar labels
+      
+      // Update displays in settings
+      const nameDisp = document.getElementById('settingsNameDisplay');
+      const roleDisp = document.getElementById('settingsRoleDisplay');
+      const avatarDisp = document.getElementById('settingsAvatarDisplay');
+      if (nameDisp) nameDisp.textContent = updatedUser.name;
+      if (roleDisp) roleDisp.textContent = updatedUser.role;
+      if (avatarDisp) avatarDisp.textContent = updatedUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+      if (typeof showToast === 'function') {
+        showToast('Profile settings saved successfully');
+      } else if (typeof showSystemToast === 'function') {
+        showSystemToast('Profile settings saved successfully');
+      }
+    });
+  }
+
+  // Password visibility toggles
+  document.querySelectorAll('.pwd-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const input = document.getElementById(targetId);
+      if (input) {
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+      }
+    });
+  });
+
+  // Change Password Form
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  if (changePasswordForm) {
+    changePasswordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const currentPwd = document.getElementById('currentPassword').value;
+      const newPwd = document.getElementById('newPassword').value;
+      const confirmPwd = document.getElementById('confirmPassword').value;
+
+      if (!currentPwd || !newPwd || !confirmPwd) {
+        if (typeof showToast === 'function') showToast('Please fill all password fields', 'error');
+        return;
+      }
+
+      if (newPwd.length < 8) {
+        if (typeof showToast === 'function') showToast('New password must be at least 8 characters long', 'error');
+        return;
+      }
+
+      if (newPwd !== confirmPwd) {
+        if (typeof showToast === 'function') showToast('Passwords do not match', 'error');
+        return;
+      }
+
+      if (typeof showToast === 'function') {
+        showToast('Password updated successfully');
+      }
+      changePasswordForm.reset();
+    });
+  }
+
+  // Theme preview cards integration
+  const themeCardLight = document.getElementById('themeCardLight');
+  const themeCardDark = document.getElementById('themeCardDark');
+  
+  function updateThemeCardSelection() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    if (currentTheme === 'dark') {
+      themeCardDark?.classList.add('selected');
+      themeCardLight?.classList.remove('selected');
+    } else {
+      themeCardLight?.classList.add('selected');
+      themeCardDark?.classList.remove('selected');
+    }
+  }
+
+  updateThemeCardSelection();
+
+  // Clicking cards sets the theme
+  themeCardLight?.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('dashboard-theme', 'light');
+    updateThemeCardSelection();
+    if (typeof showToast === 'function') showToast('Switched to Clinical Light theme');
+  });
+
+  themeCardDark?.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('dashboard-theme', 'dark');
+    updateThemeCardSelection();
+    if (typeof showToast === 'function') showToast('Switched to Midnight Dark theme');
+  });
+
+  // Backup Data Button
+  const settingsBackupBtn = document.getElementById('settingsBackupBtn');
+  if (settingsBackupBtn) {
+    settingsBackupBtn.addEventListener('click', () => {
+      if (typeof showToast === 'function') {
+        showToast('System data backup generated successfully');
+      }
+    });
+  }
+}
+

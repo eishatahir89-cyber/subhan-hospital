@@ -100,6 +100,14 @@
           <span class="nav-item-text">Inventory</span>
         </a>
 
+        <!-- Reports Navigation -->
+        <a href="#" class="nav-item" data-section="reports-view">
+          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path>
+          </svg>
+          <span class="nav-item-text">Reports</span>
+        </a>
+
         <!-- Staff Navigation -->
         <a href="#" class="nav-item" data-section="staff-view">
           <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1389,53 +1397,507 @@
           </div>
         </section>
 
-        <!-- SECTION 6: SETTINGS VIEW -->
-        <section id="settings-view" class="dashboard-section">
+        <!-- SECTION: REPORTS VIEW -->
+        <section id="reports-view" class="dashboard-section">
           <div class="page-header">
             <div class="page-title">
-              <h2>Settings & System Controls</h2>
-              <p>Configure local variables, profile structures, and server directories.</p>
+              <h2>Analytics &amp; Reports</h2>
+              <p>Comprehensive hospital statistics, performance metrics, and operational summaries.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn-secondary" id="exportReportsCSVBtn">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                Export CSV
+              </button>
+              <button class="btn-primary" id="printReportsBtn">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
+                Print Report
+              </button>
             </div>
           </div>
 
-          <div class="section-card" style="max-width: 600px;">
-            <div class="card-header">
-              <div class="card-title">
-                <h3>Local Portal Parameters</h3>
-                <p>Customize configuration profiles</p>
+          <!-- Summary Stats Grid -->
+          <div class="reports-stats-grid" id="reportsStatsGrid">
+            <div class="report-stat-card" style="--accent: #7c3aed;">
+              <div class="rstat-icon" style="background: rgba(124,58,237,0.12); color: #7c3aed;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Total Patients</span><span class="rstat-value" id="rptTotalPatients">—</span></div>
+            </div>
+            <div class="report-stat-card" style="--accent: #10b981;">
+              <div class="rstat-icon" style="background: rgba(16,185,129,0.12); color: #10b981;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Active Doctors</span><span class="rstat-value" id="rptActiveDoctors">—</span></div>
+            </div>
+            <div class="report-stat-card" style="--accent: #3b82f6;">
+              <div class="rstat-icon" style="background: rgba(59,130,246,0.12); color: #3b82f6;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Total Staff</span><span class="rstat-value" id="rptTotalStaff">—</span></div>
+            </div>
+            <div class="report-stat-card" style="--accent: #f59e0b;">
+              <div class="rstat-icon" style="background: rgba(245,158,11,0.12); color: #f59e0b;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Appointments</span><span class="rstat-value" id="rptTotalAppointments">—</span></div>
+            </div>
+            <div class="report-stat-card" style="--accent: #8b5cf6;">
+              <div class="rstat-icon" style="background: rgba(139,92,246,0.12); color: #8b5cf6;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Prescriptions</span><span class="rstat-value" id="rptTotalPrescriptions">—</span></div>
+            </div>
+            <div class="report-stat-card" style="--accent: #ef4444;">
+              <div class="rstat-icon" style="background: rgba(239,68,68,0.12); color: #ef4444;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Inventory Items</span><span class="rstat-value" id="rptTotalInventory">—</span></div>
+            </div>
+            <div class="report-stat-card rstat-revenue" style="--accent: #10b981;">
+              <div class="rstat-icon" style="background: rgba(16,185,129,0.15); color: #10b981;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Total Revenue</span><span class="rstat-value" id="rptTotalRevenue">—</span></div>
+            </div>
+            <div class="report-stat-card" style="--accent: #f59e0b;">
+              <div class="rstat-icon" style="background: rgba(245,158,11,0.12); color: #f59e0b;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+              </div>
+              <div class="rstat-info"><span class="rstat-label">Pending/Unpaid</span><span class="rstat-value" id="rptPendingAmount">—</span></div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="reports-charts-row">
+            <!-- Appointment Status Chart -->
+            <div class="section-card reports-chart-card">
+              <div class="card-header">
+                <div class="card-title"><h3>Appointment Status</h3><p>Breakdown by current status</p></div>
+              </div>
+              <div class="appt-status-chart" id="apptStatusChart">
+                <div class="appt-donut-wrapper">
+                  <svg viewBox="0 0 100 100" class="donut-svg" id="apptDonutSvg">
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="var(--border-light)" stroke-width="14"/>
+                    <circle id="apptDonutScheduled" cx="50" cy="50" r="38" fill="none" stroke="#7c3aed" stroke-width="14" stroke-dasharray="0 238.76" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                    <circle id="apptDonutCompleted" cx="50" cy="50" r="38" fill="none" stroke="#10b981" stroke-width="14" stroke-dasharray="0 238.76" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                    <circle id="apptDonutCancelled" cx="50" cy="50" r="38" fill="none" stroke="#ef4444" stroke-width="14" stroke-dasharray="0 238.76" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                  </svg>
+                  <div class="donut-center-text"><span id="apptDonutTotal">0</span><small>Total</small></div>
+                </div>
+                <div class="donut-legend">
+                  <div class="legend-item"><span class="legend-dot" style="background:#7c3aed;"></span><span>Scheduled</span><strong id="legendScheduled">0</strong></div>
+                  <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span><span>Completed</span><strong id="legendCompleted">0</strong></div>
+                  <div class="legend-item"><span class="legend-dot" style="background:#ef4444;"></span><span>Cancelled</span><strong id="legendCancelled">0</strong></div>
+                </div>
               </div>
             </div>
 
-            <div class="list-container">
-              <!-- Dark mode setting toggle -->
-              <div class="list-item">
-                <div class="patient-details">
-                  <span class="patient-name">Midnight Mode Switcher</span>
-                  <span class="patient-reason">Render the layout in dark color themes</span>
+            <!-- Inventory Status Chart -->
+            <div class="section-card reports-chart-card">
+              <div class="card-header">
+                <div class="card-title"><h3>Inventory Status</h3><p>Stock level distribution</p></div>
+              </div>
+              <div class="inv-bars-chart" id="invBarsChart">
+                <div class="inv-bar-row">
+                  <span class="inv-bar-label">In Stock</span>
+                  <div class="inv-bar-track"><div class="inv-bar-fill" id="invBarInStock" style="background: #10b981; width: 0%;"></div></div>
+                  <span class="inv-bar-count" id="invCountInStock">0</span>
                 </div>
-                <button class="btn-primary" id="settingsThemeBtn" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
-                  Toggle Dark Theme
-                </button>
+                <div class="inv-bar-row">
+                  <span class="inv-bar-label">Low Stock</span>
+                  <div class="inv-bar-track"><div class="inv-bar-fill" id="invBarLowStock" style="background: #f59e0b; width: 0%;"></div></div>
+                  <span class="inv-bar-count" id="invCountLowStock">0</span>
+                </div>
+                <div class="inv-bar-row">
+                  <span class="inv-bar-label">Out of Stock</span>
+                  <div class="inv-bar-track"><div class="inv-bar-fill" id="invBarOutOfStock" style="background: #ef4444; width: 0%;"></div></div>
+                  <span class="inv-bar-count" id="invCountOutOfStock">0</span>
+                </div>
               </div>
 
-              <!-- Database backup sync setting -->
-              <div class="list-item">
-                <div class="patient-details">
-                  <span class="patient-name">Database Backup Roster</span>
-                  <span class="patient-reason">Sync clinical tables with main backup directories</span>
-                </div>
-                <button class="btn-primary" id="settingsBackupBtn" style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--color-secondary);">
-                  Backup Directory Table
-                </button>
+              <!-- Patient Gender -->
+              <div class="card-header" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
+                <div class="card-title"><h3>Patient Gender</h3><p>Distribution breakdown</p></div>
               </div>
+              <div class="inv-bars-chart">
+                <div class="inv-bar-row">
+                  <span class="inv-bar-label">Male</span>
+                  <div class="inv-bar-track"><div class="inv-bar-fill" id="genderBarMale" style="background: #3b82f6; width: 0%;"></div></div>
+                  <span class="inv-bar-count" id="genderCountMale">0</span>
+                </div>
+                <div class="inv-bar-row">
+                  <span class="inv-bar-label">Female</span>
+                  <div class="inv-bar-track"><div class="inv-bar-fill" id="genderBarFemale" style="background: #ec4899; width: 0%;"></div></div>
+                  <span class="inv-bar-count" id="genderCountFemale">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Financial Summary -->
+            <div class="section-card reports-chart-card">
+              <div class="card-header">
+                <div class="card-title"><h3>Financial Summary</h3><p>Billing collection overview</p></div>
+              </div>
+              <div class="financial-summary-list">
+                <div class="fin-item">
+                  <div class="fin-item-label">
+                    <span class="fin-dot" style="background:#10b981;"></span>
+                    <span>Revenue Collected</span>
+                  </div>
+                  <strong class="fin-amount" id="finRevenue" style="color:#10b981;">$0.00</strong>
+                </div>
+                <div class="fin-item">
+                  <div class="fin-item-label">
+                    <span class="fin-dot" style="background:#f59e0b;"></span>
+                    <span>Pending Payments</span>
+                  </div>
+                  <strong class="fin-amount" id="finPending" style="color:#f59e0b;">$0.00</strong>
+                </div>
+                <div class="fin-item">
+                  <div class="fin-item-label">
+                    <span class="fin-dot" style="background:#ef4444;"></span>
+                    <span>Unpaid Bills</span>
+                  </div>
+                  <strong class="fin-amount" id="finUnpaid" style="color:#ef4444;">$0.00</strong>
+                </div>
+                <div class="fin-divider"></div>
+                <div class="fin-item fin-total">
+                  <span>Total Billed</span>
+                  <strong class="fin-amount" id="finTotal">$0.00</strong>
+                </div>
+                <div class="fin-progress-wrapper">
+                  <div class="fin-progress-track">
+                    <div class="fin-progress-fill" id="finProgressBar" style="width: 0%; background: linear-gradient(90deg, #7c3aed, #10b981);"></div>
+                  </div>
+                  <span class="fin-collection-rate" id="finCollectionRate">Collection Rate: 0%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Department Breakdown Table -->
+          <div class="section-card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+              <div class="card-title"><h3>Doctor Department Breakdown</h3><p>Distribution of physicians across departments</p></div>
+            </div>
+            <div class="table-wrapper">
+              <table class="admissions-table">
+                <thead>
+                  <tr>
+                    <th>Department</th>
+                    <th>Number of Doctors</th>
+                    <th>Distribution</th>
+                  </tr>
+                </thead>
+                <tbody id="deptBreakdownTable">
+                  <tr><td colspan="3"><div class="empty-state"><p>Loading department data...</p></div></td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
 
+        <!-- SECTION 6: SETTINGS VIEW (FULL TABBED) -->
+        <section id="settings-view" class="dashboard-section">
+          <div class="page-header">
+            <div class="page-title">
+              <h2>Settings &amp; Preferences</h2>
+              <p>Manage your profile, system preferences, notifications, and security settings.</p>
+            </div>
+          </div>
+
+          <!-- Settings Tabs Navigation -->
+          <div class="settings-tabs-nav" id="settingsTabsNav">
+            <button class="settings-tab-btn active" data-tab="profile">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+              Profile
+            </button>
+            <button class="settings-tab-btn" data-tab="password">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+              Password
+            </button>
+            <button class="settings-tab-btn" data-tab="notifications">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
+              Notifications
+            </button>
+            <button class="settings-tab-btn" data-tab="preferences">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/></svg>
+              Preferences
+            </button>
+            <button class="settings-tab-btn" data-tab="theme">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+              Theme
+            </button>
+          </div>
+
+          <!-- TAB: Profile Settings -->
+          <div class="settings-tab-panel active" id="tab-profile">
+            <div class="settings-panel-grid">
+              <div class="section-card settings-form-card">
+                <div class="card-header">
+                  <div class="card-title"><h3>Profile Information</h3><p>Update your personal and contact details</p></div>
+                </div>
+                <div class="settings-avatar-row">
+                  <div class="settings-avatar" id="settingsAvatarDisplay">AS</div>
+                  <div>
+                    <p style="font-weight:600; color: var(--text-main);" id="settingsNameDisplay">Ali Subhan</p>
+                    <p style="font-size:0.85rem; color: var(--text-muted);" id="settingsRoleDisplay">Administrator</p>
+                  </div>
+                </div>
+                <form id="profileSettingsForm" novalidate>
+                  <div class="settings-form-grid">
+                    <div class="form-field-wrapper">
+                      <label>Full Name</label>
+                      <input type="text" id="settingsFullName" class="form-input-element" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-field-wrapper">
+                      <label>Email Address</label>
+                      <input type="email" id="settingsEmail" class="form-input-element" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-field-wrapper">
+                      <label>Phone Number</label>
+                      <input type="tel" id="settingsPhone" class="form-input-element" placeholder="+92 300 0000000">
+                    </div>
+                    <div class="form-field-wrapper">
+                      <label>Role / Position</label>
+                      <input type="text" id="settingsRole" class="form-input-element" placeholder="Hospital Administrator">
+                    </div>
+                    <div class="form-field-wrapper form-group-full">
+                      <label>Department</label>
+                      <input type="text" id="settingsDepartment" class="form-input-element" placeholder="Administration">
+                    </div>
+                  </div>
+                  <div class="settings-form-actions">
+                    <button type="submit" class="btn-primary">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                      Save Profile
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="section-card settings-info-card">
+                <div class="card-header"><div class="card-title"><h3>Account Details</h3><p>Your account summary</p></div></div>
+                <div class="settings-info-list">
+                  <div class="settings-info-row"><span>Account Status</span><span class="badge badge-success">Active</span></div>
+                  <div class="settings-info-row"><span>Role Level</span><span class="badge badge-info">Administrator</span></div>
+                  <div class="settings-info-row"><span>Last Login</span><span id="settingsLastLogin" style="color:var(--text-muted); font-size:0.85rem;">—</span></div>
+                  <div class="settings-info-row"><span>Session Token</span><span style="color:var(--text-muted); font-size:0.85rem; font-family:monospace;">••••••••</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Password -->
+          <div class="settings-tab-panel" id="tab-password">
+            <div class="section-card" style="max-width: 550px;">
+              <div class="card-header"><div class="card-title"><h3>Change Password</h3><p>Keep your account secure with a strong password</p></div></div>
+              <form id="changePasswordForm" novalidate>
+                <div class="settings-form-grid" style="grid-template-columns: 1fr;">
+                  <div class="form-field-wrapper">
+                    <label>Current Password</label>
+                    <div class="password-input-wrapper">
+                      <input type="password" id="currentPassword" class="form-input-element" placeholder="Enter current password" required>
+                      <button type="button" class="pwd-toggle-btn" data-target="currentPassword">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label>New Password</label>
+                    <div class="password-input-wrapper">
+                      <input type="password" id="newPassword" class="form-input-element" placeholder="At least 8 characters" required>
+                      <button type="button" class="pwd-toggle-btn" data-target="newPassword">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      </button>
+                    </div>
+                    <div class="password-strength-bar" id="pwdStrengthBar"><div class="pwd-strength-fill" id="pwdStrengthFill"></div></div>
+                    <span class="pwd-strength-label" id="pwdStrengthLabel"></span>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label>Confirm New Password</label>
+                    <div class="password-input-wrapper">
+                      <input type="password" id="confirmPassword" class="form-input-element" placeholder="Repeat new password" required>
+                      <button type="button" class="pwd-toggle-btn" data-target="confirmPassword">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-form-actions">
+                  <button type="submit" class="btn-primary">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+                    Update Password
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- TAB: Notifications -->
+          <div class="settings-tab-panel" id="tab-notifications">
+            <div class="section-card" style="max-width: 600px;">
+              <div class="card-header"><div class="card-title"><h3>Notification Preferences</h3><p>Choose how you want to be notified</p></div></div>
+              <div class="settings-toggle-list">
+                <div class="settings-toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Email Notifications</span>
+                    <span class="toggle-desc">Receive alerts via email for critical events</span>
+                  </div>
+                  <label class="toggle-switch"><input type="checkbox" id="notifEmail" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="settings-toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">In-App Alerts</span>
+                    <span class="toggle-desc">Show notification banners within the dashboard</span>
+                  </div>
+                  <label class="toggle-switch"><input type="checkbox" id="notifInApp" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="settings-toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">ICU Capacity Alerts</span>
+                    <span class="toggle-desc">Alert when bed occupancy exceeds 80%</span>
+                  </div>
+                  <label class="toggle-switch"><input type="checkbox" id="notifICU" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="settings-toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Appointment Reminders</span>
+                    <span class="toggle-desc">Remind of upcoming appointments 30 mins before</span>
+                  </div>
+                  <label class="toggle-switch"><input type="checkbox" id="notifAppt"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="settings-toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Billing Alerts</span>
+                    <span class="toggle-desc">Notify when invoices are overdue</span>
+                  </div>
+                  <label class="toggle-switch"><input type="checkbox" id="notifBilling" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="settings-toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Inventory Low Stock</span>
+                    <span class="toggle-desc">Alert when items fall below minimum threshold</span>
+                  </div>
+                  <label class="toggle-switch"><input type="checkbox" id="notifInventory" checked><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+              <div class="settings-form-actions">
+                <button class="btn-primary" id="saveNotifSettingsBtn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                  Save Preferences
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Preferences -->
+          <div class="settings-tab-panel" id="tab-preferences">
+            <div class="section-card" style="max-width: 600px;">
+              <div class="card-header"><div class="card-title"><h3>System Preferences</h3><p>Customize how the system behaves</p></div></div>
+              <form id="preferencesForm">
+                <div class="settings-form-grid">
+                  <div class="form-field-wrapper">
+                    <label>Language</label>
+                    <select id="prefLanguage" class="form-input-element">
+                      <option value="en">English (US)</option>
+                      <option value="ur">Urdu</option>
+                      <option value="ar">Arabic</option>
+                    </select>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label>Timezone</label>
+                    <select id="prefTimezone" class="form-input-element">
+                      <option value="PKT">Pakistan Standard Time (PKT)</option>
+                      <option value="UTC">UTC</option>
+                      <option value="EST">Eastern Standard Time (EST)</option>
+                      <option value="GMT">Greenwich Mean Time (GMT)</option>
+                    </select>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label>Date Format</label>
+                    <select id="prefDateFormat" class="form-input-element">
+                      <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                      <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                      <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                    </select>
+                  </div>
+                  <div class="form-field-wrapper">
+                    <label>Items Per Page</label>
+                    <select id="prefItemsPerPage" class="form-input-element">
+                      <option value="10">10 items</option>
+                      <option value="20">20 items</option>
+                      <option value="50">50 items</option>
+                    </select>
+                  </div>
+                  <div class="form-field-wrapper form-group-full">
+                    <label>Currency Symbol</label>
+                    <select id="prefCurrency" class="form-input-element">
+                      <option value="PKR">PKR — Pakistani Rupee</option>
+                      <option value="USD">USD — US Dollar</option>
+                      <option value="SAR">SAR — Saudi Riyal</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="settings-form-actions">
+                  <button type="submit" class="btn-primary">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                    Save Preferences
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- TAB: Theme -->
+          <div class="settings-tab-panel" id="tab-theme">
+            <div class="section-card" style="max-width: 680px;">
+              <div class="card-header"><div class="card-title"><h3>Appearance &amp; Theme</h3><p>Choose your preferred display style</p></div></div>
+              <div class="theme-cards-grid">
+                <div class="theme-preview-card" id="themeCardLight" data-theme-select="light">
+                  <div class="theme-preview-mockup light-mock">
+                    <div class="mock-sidebar"></div>
+                    <div class="mock-content">
+                      <div class="mock-bar"></div>
+                      <div class="mock-card"></div>
+                    </div>
+                  </div>
+                  <div class="theme-card-label">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    Clinical Light
+                  </div>
+                </div>
+                <div class="theme-preview-card" id="themeCardDark" data-theme-select="dark">
+                  <div class="theme-preview-mockup dark-mock">
+                    <div class="mock-sidebar"></div>
+                    <div class="mock-content">
+                      <div class="mock-bar"></div>
+                      <div class="mock-card"></div>
+                    </div>
+                  </div>
+                  <div class="theme-card-label">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    Midnight Dark
+                  </div>
+                </div>
+              </div>
+              <div class="settings-form-actions" style="margin-top: 1.5rem;">
+                <button class="btn-primary" id="settingsThemeBtn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+                  Toggle Theme
+                </button>
+                <button class="btn-secondary" id="settingsBackupBtn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 2.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125m16.5 2.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+                  Backup Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
       </main>
     </div>
-  </div>
-
   <!-- TOAST CONTAINER -->
   <div id="toastContainer" class="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
 
@@ -1736,8 +2198,8 @@
             <input type="number" step="0.01" id="iUnitPrice" class="form-input-element" required>
           </div>
           <div class="form-field-wrapper">
-            <label>Expiry Date</label>
-            <input type="date" id="iExpiryDate" class="form-input-element" required>
+            <label>Expiry Date <span style="color:var(--text-muted);font-size:0.75rem;">(optional for equipment)</span></label>
+            <input type="date" id="iExpiryDate" class="form-input-element">
           </div>
         </div>
         <footer class="modal-footer">
@@ -1779,8 +2241,8 @@
             </div>
           </div>
           <div class="form-field-wrapper">
-            <label>Total Amount ($) (Auto-calculated)</label>
-            <input type="number" id="bTotalAmount" class="form-input-element" required readonly placeholder="0.00">
+            <label>Total Amount ($) <span style="color:var(--text-muted);font-size:0.75rem;">(auto-calculated or manual override)</span></label>
+            <input type="number" id="bTotalAmount" class="form-input-element" required step="0.01" min="0" placeholder="0.00">
           </div>
           <div class="form-field-wrapper">
             <label>Payment Method</label>
@@ -1902,6 +2364,9 @@
       </footer>
     </div>
   </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" aria-live="polite" aria-atomic="false"></div>
 
   <!-- Load dashboard behavior -->
   <script src="js/app.js"></script>
